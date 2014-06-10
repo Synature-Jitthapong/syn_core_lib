@@ -18,45 +18,48 @@ import android.os.AsyncTask;
 public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, String> {
 	
 	protected SoapObject mSoapRequest;
-	protected SoapSerializationEnvelope mEnvelope;
-	protected HttpTransportSE mAndroidHttpTransport;
 	protected int mTimeout = 30 * 1000;
 	protected String mNameSpace;
 	protected String mWebMethod;
 	protected Context mContext;
 	protected PropertyInfo mProperty;
-	protected String mHttpErrMsg;
 	
 	public Ksoap2WebServiceTask(Context c, String nameSpace, String method){
 		mContext = c;
 		mNameSpace = nameSpace;
 		mWebMethod = method;
 		mSoapRequest = new SoapObject(nameSpace, mWebMethod);
-		mEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		mEnvelope.dotNet = true;
-		mEnvelope.setOutputSoapObject(mSoapRequest);
 	}
 	
 	@Override
 	protected String doInBackground(String... uri) {
 		String result = "";
-		String url = uri[0];
+		String url = uri[0] + "?WSDL";
 		
 		ConnectivityManager connMgr = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
 			System.setProperty("http.keepAlive", "false");
-			mAndroidHttpTransport = new HttpTransportSE(url, mTimeout);
+
+			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+			envelope.dotNet = true;
+			envelope.setOutputSoapObject(mSoapRequest);
 			//androidHttpTransport.debug = true;
 			String soapAction = mNameSpace + mWebMethod;
 			try {
-				mAndroidHttpTransport.call(soapAction, mEnvelope);
-				try {
-					result = mEnvelope.getResponse().toString();
-				} catch (SoapFault e) {
-					result = e.getMessage();
-					e.printStackTrace();
+				HttpTransportSE androidHttpTransport = new HttpTransportSE(url, mTimeout);
+				androidHttpTransport.call(soapAction, envelope);
+				if(envelope.bodyIn instanceof SoapObject){
+					SoapObject soapResult = (SoapObject)envelope.bodyIn;
+					if(soapResult != null){
+						result = soapResult.getProperty(0).toString();
+					}else{
+						result = "No result!";
+					}
+				}else if(envelope.bodyIn instanceof SoapFault){
+					SoapFault soapFault = (SoapFault) envelope.bodyIn;
+					result = soapFault.getMessage();
 				}
 			} catch (IOException e) {
 				result = e.getMessage();
@@ -64,10 +67,6 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 			} catch (XmlPullParserException e) {
 				result = e.getMessage();
 				e.printStackTrace();
-			}
-			
-			if(result == null || result.equals("")){
-				result = "Network Error!";
 			}
 		}else{
 			result = "Cannot connect to network!";
