@@ -34,7 +34,7 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 	@Override
 	protected String doInBackground(String... uri) {
 		String result = "";
-		String url = uri[0] + "?WSDL";
+		String url = uri[0];// + "?WSDL";
 		
 		ConnectivityManager connMgr = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -47,11 +47,12 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 			envelope.setOutputSoapObject(mSoapRequest);
 			//androidHttpTransport.debug = true;
 			String soapAction = mNameSpace + mWebMethod;
+			HttpTransportSE androidHttpTransport = null;
 			try {
-				HttpTransportSE androidHttpTransport = new HttpTransportSE(url, mTimeout);
+				androidHttpTransport = new HttpTransportSE(url, mTimeout);
 				androidHttpTransport.call(soapAction, envelope);
 				if(envelope.bodyIn instanceof SoapObject){
-					SoapObject soapResult = (SoapObject)envelope.bodyIn;
+					SoapObject soapResult = (SoapObject) envelope.bodyIn;
 					if(soapResult != null){
 						result = soapResult.getProperty(0).toString();
 					}else{
