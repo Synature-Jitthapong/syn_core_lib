@@ -18,16 +18,18 @@ import android.os.AsyncTask;
 public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, String> {
 	
 	protected SoapObject mSoapRequest;
-	protected int mTimeout = 30 * 1000;
+	protected int mTimeOut = 30 * 1000;
 	protected String mNameSpace;
 	protected String mWebMethod;
 	protected Context mContext;
 	protected PropertyInfo mProperty;
 	
-	public Ksoap2WebServiceTask(Context c, String nameSpace, String method){
+	public Ksoap2WebServiceTask(Context c, String nameSpace, 
+			String method, int timeOut){
 		mContext = c;
 		mNameSpace = nameSpace;
 		mWebMethod = method;
+		mTimeOut = timeOut;
 		mSoapRequest = new SoapObject(nameSpace, mWebMethod);
 	}
 	
@@ -49,7 +51,7 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 			String soapAction = mNameSpace + mWebMethod;
 			HttpTransportSE androidHttpTransport = null;
 			try {
-				androidHttpTransport = new HttpTransportSE(url, mTimeout);
+				androidHttpTransport = new HttpTransportSE(url, mTimeOut);
 				androidHttpTransport.call(soapAction, envelope);
 				if(envelope.bodyIn instanceof SoapObject){
 					SoapObject soapResult = (SoapObject) envelope.bodyIn;

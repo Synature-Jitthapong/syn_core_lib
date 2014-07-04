@@ -1,5 +1,7 @@
 package com.synature.util;
 
+import android.text.TextUtils;
+
 /**
  * @author j1tth4
  * This utility class use for manage level of thai text 
@@ -32,7 +34,7 @@ public class ThaiLevelText {
 			case 3639: //สระอื
 				//ไม้หันอากาศ และ สระด้านบน เช่น อิ อี
 				//Check if letter next to it is วรรณยุกต์
-				if (i == prntTxt.length()) {
+				if (i == prntTxt.length() - 1) {
 					// This is the last letter
 					strChar = Character.toString(prntTxt.charAt(i));
 				} else {
@@ -44,7 +46,7 @@ public class ThaiLevelText {
 					case 3658: //ไม้ตรี
 					case 3659: //ไม้จัตวา
 					case 3660: //การันต์
-					case 3661: //นิคหิต
+					//case 3661: //นิคหิต
 						//วรรณยุกต์ และการันต์
 						switch (nextCode) {
 						case 3656:
@@ -131,16 +133,15 @@ public class ThaiLevelText {
 							}
 							break;
 						}
-						strChar = String.valueOf(nextCode);
+						strChar = Character.toString((char) nextCode);
 						i += 1;
-
 						break;
 					default:
 						strChar = Character.toString(prntTxt.charAt(i));
 						break;
 					}
 				}
-				strLine1 = strLine1.substring(1, strLine1.length()) + strChar;
+				strLine1 = strLine1.substring(0, strLine1.length() - 1) + strChar;
 				break;
 			case 3655: //ไม้ไต่คู้
 			case 3656:
@@ -151,40 +152,39 @@ public class ThaiLevelText {
 			case 3661:
 				//วรรณยุกต์
 				// Check if letter next to it is วรรณยุกต์
-				if (i == prntTxt.length()) { // This is the last letter
-					strLine1 = strLine1.substring(1, strLine1.length()) + prntTxt.charAt(i);
+				if (i == prntTxt.length() - 1) { // This is the last letter
+					strLine1 = strLine1.substring(0, strLine1.length() - 1) + Character.toString(prntTxt.charAt(i));
 				} else {
-					nextCode = (int) prntTxt.charAt(i);
+					nextCode = (int) prntTxt.charAt(i + 1);
 					switch (nextCode) {
 					case 3635: //สระอำ
-						switch (code) { //เปลี่ยน สระอำ เป็น สระอา และ เปลี่ยน ลูกกลมข้างบนรวมกับวรรณยุกต์
+						switch (code) {
 						case 3656: //ไม้เอก
-							strLine1 = strLine1.substring(1, strLine1.length()) + (char) 0x95 + " ";
+							strLine1 = strLine1.substring(0, strLine1.length() - 1) + Character.toString((char) 3656) + " ";
 							break;
 						case 3657: //ไม้โท
-							strLine1 = strLine1.substring(1, strLine1.length()) + (char) 0x96 + " ";
+							strLine1 = strLine1.substring(0, strLine1.length() - 1) + Character.toString((char) 3657) + " ";
 							break;
 						case 3658: //ไม้ตรี
-							strLine1 = strLine1.substring(1, strLine1.length()) + (char) 0x97 + " ";
+							strLine1 = strLine1.substring(0, strLine1.length() - 1) + Character.toString((char) 3658) + " ";
 							break;
 						case 3659: //ไม้จัตวา
-							strLine1 = strLine1.substring(1, strLine1.length()) + (char) 0x98 + " ";
+							strLine1 = strLine1.substring(0, strLine1.length() - 1) + Character.toString((char) 3659) + " ";
 							break;
 						}
-						strLine2 += (char) 3634; //สระอา
+						strLine2 += Character.toString((char) 3635);
 						strLine3 += " ";
 						i += 1;
 						break;
 					default:
-						strLine1 = strLine1.substring(1, strLine1.length()) + prntTxt.charAt(i);
+						strLine1 = strLine1.substring(0, strLine1.length() - 1) + Character.toString(prntTxt.charAt(i));
 						break;
 					}
 				}
-
 				break;
 			case 3640: //สระอุ
 			case 3641: //สระอู
-				strLine3 = strLine3.substring(1, strLine3.length()) + Character.toString(prntTxt.charAt(i));
+				strLine3 = strLine3.substring(0, strLine3.length() - 1) + Character.toString(prntTxt.charAt(i));
 				break;
 			default:
 				strLine1 += " ";
@@ -193,9 +193,9 @@ public class ThaiLevelText {
 				break;
 			}
 		}
-		resultText.TextLine1 = strLine1;
-		resultText.TextLine2 = strLine2;
-		resultText.TextLine3 = strLine3;
+		resultText.TextLine1 = TextUtils.isEmpty(strLine1.trim()) ? "" : strLine1;
+		resultText.TextLine2 = TextUtils.isEmpty(strLine2.trim()) ? "" : strLine2;
+		resultText.TextLine3 = TextUtils.isEmpty(strLine3.trim()) ? "" : strLine3;
 		return resultText;
 	}
 
