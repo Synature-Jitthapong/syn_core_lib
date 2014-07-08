@@ -12,17 +12,14 @@ public class ThaiLevelText {
 	 * @return OPOSThaiText objec
 	 */
 	public static OPOSThaiText parsingThaiLevel(String prntTxt) {
-		String strLine1 = null;
-		String strLine2 = null;
-		String strLine3 = null;
+		String strLine1 = "";
+		String strLine2 = "";
+		String strLine3 = "";
 		int i = 0;
 		int code = 0;
 		int nextCode = 0;
-		String strChar = null;
+		String strChar = "";
 		OPOSThaiText resultText = new OPOSThaiText();
-		strLine1 = "";
-		strLine2 = "";
-		strLine3 = "";
 		for (; i < prntTxt.length(); i++) {
 			code = prntTxt.charAt(i);
 			strChar = Character.toString(prntTxt.charAt(i));
@@ -39,8 +36,7 @@ public class ThaiLevelText {
 					strChar = Character.toString(prntTxt.charAt(i));
 				} else {
 					nextCode = (int) prntTxt.charAt(i + 1);
-					switch (nextCode) {
-					// Comboine current and the next character into new one
+					switch (nextCode) {// Comboine current and the next character into new one
 					case 3656: //ไม้เอก
 					case 3657: //ไม้โท
 					case 3658: //ไม้ตรี
@@ -52,83 +48,83 @@ public class ThaiLevelText {
 						case 3656:
 							switch (code) {
 							case 3633: //ไม้หันอากาศ
-								nextCode = 0x80;
+								nextCode = 3633;
 								break;
 							case 3636: //อิ
-								nextCode = 0x84;
+								nextCode = 3636;
 								break;
 							case 3637: //อี
-								nextCode = 0x89;
+								nextCode = 3637;
 								break;
 							case 3638: //อึ
-								nextCode = 0x8d;
+								nextCode = 3638;
 								break;
 							case 3639: //อื
-								nextCode = 0x91;
+								nextCode = 3639;
 								break;
 							}
 							break;
 						case 3657: //ไม้โท
 							switch (code) {
 							case 3633: //ไม้หันอากาศ
-								nextCode = 0x81;
+								nextCode = 3633;
 								break;
 							case 3636: //อิ
-								nextCode = 0x85;
+								nextCode = 3636;
 								break;
 							case 3637: //อี
-								nextCode = 0x8a;
+								nextCode = 3637;
 								break;
 							case 3638: //อึ
-								nextCode = 0x8e;
+								nextCode = 3638;
 								break;
 							case 3639: //อื
-								nextCode = 0x92;
+								nextCode = 3639;
 								break;
 							}
 							break;
 						case 3658: //ไม้ตรี
 							switch (code) {
 							case 3633: //ไม้หันอากาศ
-								nextCode = 0x82;
+								nextCode = 3633;
 								break;
 							case 3636: //อิ
-								nextCode = 0x86;
+								nextCode = 3636;
 								break;
 							case 3637: //อี
-								nextCode = 0x8b;
+								nextCode = 3637;//0x8b;
 								break;
 							case 3638: //อึ
-								nextCode = 0x8f;
+								nextCode = 3638;
 								break;
 							case 3639: //อื
-								nextCode = 0x93;
+								nextCode = 3639;
 								break;
 							}
 							break;
 						case 3659: //ไมจัตวา
 							switch (code) {
 							case 3633: //ไม้หันอากาศ
-								nextCode = 0x83;
+								nextCode = 3633;
 								break;
 							case 3636: //อิ
-								nextCode = 0x87;
+								nextCode = 3636;
 								break;
 							case 3637: //อี
-								nextCode = 0x8c;
+								nextCode = 3637;
 								break;
 							case 3638: //อึ
-								nextCode = 0x90;
+								nextCode = 3638;
 								break;
 							case 3639: //อื
-								nextCode = 0x94;
+								nextCode = 3639;
 								break;
 							}
 							break;
 						case 3660: //การันต์
 							switch (code) {
 							case 3636: //อิ
-								nextCode = 0x88;
+								nextCode = 3636;
 								break;
 							}
 							break;
