@@ -11,7 +11,7 @@ public class ThaiLevelText {
 	 * @param unicode prntTxt
 	 * @return OPOSThaiText objec
 	 */
-	public static OPOSThaiText parsingThaiLevel(String prntTxt) {
+	public static ThaiTextThreeLine parsingThaiLevel(String prntTxt) {
 		String strLine1 = "";
 		String strLine2 = "";
 		String strLine3 = "";
@@ -19,10 +19,9 @@ public class ThaiLevelText {
 		int code = 0;
 		int nextCode = 0;
 		String strChar = "";
-		OPOSThaiText resultText = new OPOSThaiText();
+		ThaiTextThreeLine resultText = new ThaiTextThreeLine();
 		for (; i < prntTxt.length(); i++) {
 			code = prntTxt.charAt(i);
-			strChar = Character.toString(prntTxt.charAt(i));
 			switch (code) {
 			case 3633: //ไม้หันอากาศ
 			case 3636: //สระอิ
@@ -44,91 +43,91 @@ public class ThaiLevelText {
 					case 3660: //การันต์
 					//case 3661: //นิคหิต
 						//วรรณยุกต์ และการันต์
-						switch (nextCode) {
-						case 3656:
-							switch (code) {
-							case 3633: //ไม้หันอากาศ
-								nextCode = 3633;
-								break;
-							case 3636: //อิ
-								nextCode = 3636;
-								break;
-							case 3637: //อี
-								nextCode = 3637;
-								break;
-							case 3638: //อึ
-								nextCode = 3638;
-								break;
-							case 3639: //อื
-								nextCode = 3639;
-								break;
-							}
-							break;
-						case 3657: //ไม้โท
-							switch (code) {
-							case 3633: //ไม้หันอากาศ
-								nextCode = 3633;
-								break;
-							case 3636: //อิ
-								nextCode = 3636;
-								break;
-							case 3637: //อี
-								nextCode = 3637;
-								break;
-							case 3638: //อึ
-								nextCode = 3638;
-								break;
-							case 3639: //อื
-								nextCode = 3639;
-								break;
-							}
-							break;
-						case 3658: //ไม้ตรี
-							switch (code) {
-							case 3633: //ไม้หันอากาศ
-								nextCode = 3633;
-								break;
-							case 3636: //อิ
-								nextCode = 3636;
-								break;
-							case 3637: //อี
-								nextCode = 3637;//0x8b;
-								break;
-							case 3638: //อึ
-								nextCode = 3638;
-								break;
-							case 3639: //อื
-								nextCode = 3639;
-								break;
-							}
-							break;
-						case 3659: //ไมจัตวา
-							switch (code) {
-							case 3633: //ไม้หันอากาศ
-								nextCode = 3633;
-								break;
-							case 3636: //อิ
-								nextCode = 3636;
-								break;
-							case 3637: //อี
-								nextCode = 3637;
-								break;
-							case 3638: //อึ
-								nextCode = 3638;
-								break;
-							case 3639: //อื
-								nextCode = 3639;
-								break;
-							}
-							break;
-						case 3660: //การันต์
-							switch (code) {
-							case 3636: //อิ
-								nextCode = 3636;
-								break;
-							}
-							break;
-						}
+//						switch (nextCode) {
+//						case 3656:
+//							switch (code) {
+//							case 3633: //ไม้หันอากาศ
+//								nextCode = 3633;
+//								break;
+//							case 3636: //อิ
+//								nextCode = 3636;
+//								break;
+//							case 3637: //อี
+//								nextCode = 3637;
+//								break;
+//							case 3638: //อึ
+//								nextCode = 3638;
+//								break;
+//							case 3639: //อื
+//								nextCode = 3639;
+//								break;
+//							}
+//							break;
+//						case 3657: //ไม้โท
+//							switch (code) {
+//							case 3633: //ไม้หันอากาศ
+//								nextCode = 3633;
+//								break;
+//							case 3636: //อิ
+//								nextCode = 3636;
+//								break;
+//							case 3637: //อี
+//								nextCode = 3637;
+//								break;
+//							case 3638: //อึ
+//								nextCode = 3638;
+//								break;
+//							case 3639: //อื
+//								nextCode = 3639;
+//								break;
+//							}
+//							break;
+//						case 3658: //ไม้ตรี
+//							switch (code) {
+//							case 3633: //ไม้หันอากาศ
+//								nextCode = 3633;
+//								break;
+//							case 3636: //อิ
+//								nextCode = 3636;
+//								break;
+//							case 3637: //อี
+//								nextCode = 3637;//0x8b;
+//								break;
+//							case 3638: //อึ
+//								nextCode = 3638;
+//								break;
+//							case 3639: //อื
+//								nextCode = 3639;
+//								break;
+//							}
+//							break;
+//						case 3659: //ไมจัตวา
+//							switch (code) {
+//							case 3633: //ไม้หันอากาศ
+//								nextCode = 3633;
+//								break;
+//							case 3636: //อิ
+//								nextCode = 3636;
+//								break;
+//							case 3637: //อี
+//								nextCode = 3637;
+//								break;
+//							case 3638: //อึ
+//								nextCode = 3638;
+//								break;
+//							case 3639: //อื
+//								nextCode = 3639;
+//								break;
+//							}
+//							break;
+//						case 3660: //การันต์
+//							switch (code) {
+//							case 3636: //อิ
+//								nextCode = 3636;
+//								break;
+//							}
+//							break;
+//						}
 						strChar = Character.toString((char) nextCode);
 						i += 1;
 						break;
@@ -137,7 +136,8 @@ public class ThaiLevelText {
 						break;
 					}
 				}
-				strLine1 = strLine1.substring(0, strLine1.length() - 1) + strChar;
+				strLine1 = strLine1.substring(0, strLine1.length() - 1) 
+						+ Character.toString((char) code) + strChar;
 				break;
 			case 3655: //ไม้ไต่คู้
 			case 3656:
@@ -195,7 +195,7 @@ public class ThaiLevelText {
 		return resultText;
 	}
 
-	public static class OPOSThaiText
+	public static class ThaiTextThreeLine
 	{
 	    public String TextLine1;
 	    public String TextLine2;
