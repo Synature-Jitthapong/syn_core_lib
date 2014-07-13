@@ -16,20 +16,24 @@ public class MyServerSocket implements ISocketConnection{
 	private ServerSocket mServSocket;
 	private Socket mSocket;
 
-    private PrintWriter     mWriter;
-    private BufferedReader  mReader;
+    private PrintWriter mWriter;
+    private BufferedReader mReader;
 
-	public MyServerSocket(int port) throws IOException{
-            mServSocket = new ServerSocket(port);
-            mSocket = mServSocket.accept();
-            mWriter = new PrintWriter(new OutputStreamWriter(
-            		mSocket.getOutputStream()));
-            mReader = new BufferedReader(new InputStreamReader(
-            		mSocket.getInputStream()));
+	public MyServerSocket(int port){
+	    try {
+			mServSocket = new ServerSocket(port);
+			mSocket = mServSocket.accept();
+			mWriter = new PrintWriter(new OutputStreamWriter(
+					mSocket.getOutputStream()));
+			mReader = new BufferedReader(new InputStreamReader(
+					mSocket.getInputStream()));
+		} catch (IOException e) {
+			Log.d(TAG, e.getMessage());
+		}
 	}
 	
 	@Override
-	public void send(String msg) throws Exception{
+	public void send(String msg){
 		mWriter.println(msg);
 		mWriter.flush();
 	}

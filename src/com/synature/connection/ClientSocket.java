@@ -7,6 +7,9 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
+
+import android.util.Log;
 
 public class ClientSocket implements ISocketConnection {
 	public static final String TAG = ClientSocket.class.getSimpleName();
@@ -16,17 +19,23 @@ public class ClientSocket implements ISocketConnection {
 	private PrintWriter mWriter;
 	private BufferedReader mReader;
 
-	public ClientSocket(String ip, int port) throws IOException {
-		InetAddress iNetAddr = InetAddress.getByName(ip);
-		mConnect = new Socket(iNetAddr, port);
-		mWriter = new PrintWriter(new OutputStreamWriter(
-				mConnect.getOutputStream()));
-		mReader = new BufferedReader(new InputStreamReader(
-				mConnect.getInputStream()));
+	public ClientSocket(String ip, int port) {
+		try {
+			InetAddress iNetAddr = InetAddress.getByName(ip);
+			mConnect = new Socket(iNetAddr, port);
+			mWriter = new PrintWriter(new OutputStreamWriter(
+					mConnect.getOutputStream()));
+			mReader = new BufferedReader(new InputStreamReader(
+					mConnect.getInputStream()));
+		} catch (UnknownHostException e) {
+			Log.d(TAG, e.getMessage());
+		} catch (IOException e) {
+			Log.d(TAG, e.getMessage());
+		}
 	}
 
 	@Override
-	public void send(String msg) throws Exception{
+	public void send(String msg){
 		mWriter.write(msg);
 		mWriter.flush();
 	}
