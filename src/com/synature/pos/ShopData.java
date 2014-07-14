@@ -341,6 +341,14 @@ public class ShopData {
 		private String RegistrationNumber;
 		private int IsMainComputer;
 		private int IsQueueOrder;
+		private String DocumentTypeHeader;
+		
+		public String getDocumentTypeHeader() {
+			return DocumentTypeHeader;
+		}
+		public void setDocumentTypeHeader(String documentTypeHeader) {
+			DocumentTypeHeader = documentTypeHeader;
+		}
 		public int getComputerID() {
 			return ComputerID;
 		}
