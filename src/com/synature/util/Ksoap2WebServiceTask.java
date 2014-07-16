@@ -1,7 +1,10 @@
 package com.synature.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.PropertyInfo;
@@ -42,7 +45,7 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
-			System.setProperty("http.keepAlive", "false");
+			//System.setProperty("http.keepAlive", "false");
 
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
@@ -51,8 +54,13 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 			String soapAction = mNameSpace + mWebMethod;
 			HttpTransportSE androidHttpTransport = null;
 			try {
+				List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+				HeaderProperty property=new HeaderProperty("Connection", "keep-alive");
+				headerList.add(0, property);
 				androidHttpTransport = new HttpTransportSE(url, mTimeOut);
-				androidHttpTransport.call(soapAction, envelope);
+				androidHttpTransport.call(soapAction, envelope, headerList);
+				property.setValue("close");
+				headerList.set(0, property);
 				if(envelope.bodyIn instanceof SoapObject){
 					SoapObject soapResult = (SoapObject) envelope.bodyIn;
 					if(soapResult != null){

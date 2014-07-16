@@ -32,9 +32,16 @@ public class Report {
 		private int productDeptId;
 		private String productDeptCode;
 		private String productDeptName;
+		private int isComment;
 		private List<ReportDetail> reportDetail = 
 				new ArrayList<ReportDetail>();
 		
+		public int getIsComment() {
+			return isComment;
+		}
+		public void setIsComment(int isComment) {
+			this.isComment = isComment;
+		}
 		public List<ReportDetail> getReportDetail() {
 			return reportDetail;
 		}
