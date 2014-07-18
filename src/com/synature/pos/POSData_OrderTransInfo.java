@@ -57,11 +57,19 @@ public class POSData_OrderTransInfo {
     {
         private int iProductID;
         private double fProductPrice;
+        private double fDiscountPrice;
         private double fProductQty;
         private String szOrderComment;
         public List<POSData_CommentInfo> xListCommentInfo;
         private int iPGroupID;       // For child type 7
         private int iSetGroupNo;     // For child type 7
+        
+		public double getfDiscountPrice() {
+			return fDiscountPrice;
+		}
+		public void setfDiscountPrice(double fDiscountPrice) {
+			this.fDiscountPrice = fDiscountPrice;
+		}
 		public int getiProductID() {
 			return iProductID;
 		}

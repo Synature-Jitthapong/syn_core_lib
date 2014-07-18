@@ -342,7 +342,14 @@ public class ShopData {
 		private int IsMainComputer;
 		private int IsQueueOrder;
 		private String DocumentTypeHeader;
+		private int PrintReceiptHasCopy;
 		
+		public int getPrintReceiptHasCopy() {
+			return PrintReceiptHasCopy;
+		}
+		public void setPrintReceiptHasCopy(int printReceiptHasCopy) {
+			PrintReceiptHasCopy = printReceiptHasCopy;
+		}
 		public String getDocumentTypeHeader() {
 			return DocumentTypeHeader;
 		}
