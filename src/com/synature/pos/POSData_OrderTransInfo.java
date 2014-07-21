@@ -1,5 +1,6 @@
 package com.synature.pos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class POSData_OrderTransInfo {
@@ -8,7 +9,6 @@ public class POSData_OrderTransInfo {
 		private double fCommentQty;
 		private double fCommentPrice;
 		private double fDiscountPrice; // Per Item
-		
 		public int getiCommentID() {
 			return iCommentID;
 		}
@@ -35,8 +35,7 @@ public class POSData_OrderTransInfo {
 		}
 	}
 	
-	public static class POSData_PaymentAmount
-	{
+	public static class POSData_PaymentAmount{
 		private int iPaymentAmountID;
 		private int iAmount;
 		public int getiPaymentAmountID() {
@@ -53,40 +52,22 @@ public class POSData_OrderTransInfo {
 		}
 	}
 	
-	public static class POSData_ChildOrderSetLinkType7Info
-    {
+	public static class POSData_ChildOrderSetLinkType7Info{
         private int iProductID;
         private double fProductPrice;
         private double fDiscountPrice;
         private double fProductQty;
         private String szOrderComment;
-        public List<POSData_CommentInfo> xListCommentInfo;
+        public List<POSData_CommentInfo> xListCommentInfo = 
+        		new ArrayList<POSData_CommentInfo>();
         private int iPGroupID;       // For child type 7
         private int iSetGroupNo;     // For child type 7
         
-		public double getfDiscountPrice() {
-			return fDiscountPrice;
-		}
-		public void setfDiscountPrice(double fDiscountPrice) {
-			this.fDiscountPrice = fDiscountPrice;
-		}
 		public int getiProductID() {
 			return iProductID;
 		}
 		public void setiProductID(int iProductID) {
 			this.iProductID = iProductID;
-		}
-		public double getfProductPrice() {
-			return fProductPrice;
-		}
-		public void setfProductPrice(double fProductPrice) {
-			this.fProductPrice = fProductPrice;
-		}
-		public double getfProductQty() {
-			return fProductQty;
-		}
-		public void setfProductQty(double fProductQty) {
-			this.fProductQty = fProductQty;
 		}
 		public String getSzOrderComment() {
 			return szOrderComment;
@@ -105,6 +86,30 @@ public class POSData_OrderTransInfo {
 		}
 		public void setiSetGroupNo(int iSetGroupNo) {
 			this.iSetGroupNo = iSetGroupNo;
+		}
+		public double getfProductPrice() {
+			return fProductPrice;
+		}
+		public void setfProductPrice(double fProductPrice) {
+			this.fProductPrice = fProductPrice;
+		}
+		public double getfDiscountPrice() {
+			return fDiscountPrice;
+		}
+		public void setfDiscountPrice(double fDiscountPrice) {
+			this.fDiscountPrice = fDiscountPrice;
+		}
+		public double getfProductQty() {
+			return fProductQty;
+		}
+		public void setfProductQty(double fProductQty) {
+			this.fProductQty = fProductQty;
+		}
+		public List<POSData_CommentInfo> getxListCommentInfo() {
+			return xListCommentInfo;
+		}
+		public void setxListCommentInfo(List<POSData_CommentInfo> xListCommentInfo) {
+			this.xListCommentInfo = xListCommentInfo;
 		}
     }
 	  

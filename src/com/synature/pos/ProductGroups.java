@@ -13,13 +13,23 @@ public class ProductGroups {
 	private List<ProductComponent> PComponentSet = new ArrayList<ProductComponent>();
 	private List<CommentProduct> CommentProduct = new ArrayList<CommentProduct>();
 	private List<SaleMode> SaleMode = new ArrayList<SaleMode>();
-	private List<Promotion> PromotionPriceGroup = new ArrayList<Promotion>();
+	private List<PromotionPrice> PromotionPriceGroup = new ArrayList<PromotionPrice>();
+	private List<PromotionProduct> PromotionProductDiscount = new ArrayList<PromotionProduct>();
 
-	public List<Promotion> getPromotionPriceGroup() {
+	public List<PromotionProduct> getPromotionProductDiscount() {
+		return PromotionProductDiscount;
+	}
+
+	public void setPromotionProductDiscount(
+			List<PromotionProduct> promotionProductDiscount) {
+		PromotionProductDiscount = promotionProductDiscount;
+	}
+
+	public List<PromotionPrice> getPromotionPriceGroup() {
 		return PromotionPriceGroup;
 	}
 
-	public void setPromotionPriceGroup(List<Promotion> promotionPriceGroup) {
+	public void setPromotionPriceGroup(List<PromotionPrice> promotionPriceGroup) {
 		PromotionPriceGroup = promotionPriceGroup;
 	}
 
@@ -551,7 +561,53 @@ public class ProductGroups {
 		}
 	}
 	
-	public static class Promotion{
+	public static class PromotionProduct{
+		private int PriceGroupID;
+		private int ProductID;
+		private int SaleMode;
+	    private double DiscountAmount;
+	    private double DiscountPercent;
+	    private int AmountOrPercent;
+	    
+		public int getPriceGroupID() {
+			return PriceGroupID;
+		}
+		public void setPriceGroupID(int priceGroupID) {
+			PriceGroupID = priceGroupID;
+		}
+		public int getProductID() {
+			return ProductID;
+		}
+		public void setProductID(int productID) {
+			ProductID = productID;
+		}
+		public int getSaleMode() {
+			return SaleMode;
+		}
+		public void setSaleMode(int saleMode) {
+			SaleMode = saleMode;
+		}
+		public double getDiscountAmount() {
+			return DiscountAmount;
+		}
+		public void setDiscountAmount(double discountAmount) {
+			DiscountAmount = discountAmount;
+		}
+		public double getDiscountPercent() {
+			return DiscountPercent;
+		}
+		public void setDiscountPercent(double discountPercent) {
+			DiscountPercent = discountPercent;
+		}
+		public int getAmountOrPercent() {
+			return AmountOrPercent;
+		}
+		public void setAmountOrPercent(int amountOrPercent) {
+			AmountOrPercent = amountOrPercent;
+		}
+	}
+	
+	public static class PromotionPrice{
 		private int PriceGroupID;
 	    private int PromotionTypeID;
 	    private String PromotionCode;
