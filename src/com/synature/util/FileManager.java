@@ -9,13 +9,7 @@ public class FileManager {
     
     public FileManager(Context context, String dirName){
     	final String fileDir = File.separator + dirName;
-		if (android.os.Environment.getExternalStorageState().equals(
-				android.os.Environment.MEDIA_MOUNTED))
-			mSdcard = new File(
-					android.os.Environment.getExternalStorageDirectory(),
-					fileDir);
-		else
-			mSdcard = context.getCacheDir();
+			mSdcard = new File(android.os.Environment.getExternalStorageDirectory(), fileDir);
 		if (!mSdcard.exists())
 			mSdcard.mkdirs();
     }

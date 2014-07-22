@@ -59,6 +59,7 @@ public class SecondDisplayProperty {
 	public static class clsSecDisplay_ChangePayment{
 		public int iCommandTypeID = eSecDisplayCmdType.ChangePayment.getValue(); // 2
 		public String szPayAmount;
+		public String szGrandTotalAmount;
 		public String szCashChangeAmount;
 		// ---------------------------------------
 		// --- If szMemberCode has data, then show member point
