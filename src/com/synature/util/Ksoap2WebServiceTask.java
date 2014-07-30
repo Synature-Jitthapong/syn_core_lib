@@ -1,10 +1,7 @@
 package com.synature.util;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.PropertyInfo;
@@ -39,28 +36,22 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 	@Override
 	protected String doInBackground(String... uri) {
 		String result = "";
+		String dumpRes = "";
 		String url = uri[0];// + "?WSDL";
 		
+		System.setProperty("http.keepAlive", "false");
 		ConnectivityManager connMgr = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
-			//System.setProperty("http.keepAlive", "false");
-
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
 			envelope.setOutputSoapObject(mSoapRequest);
-			//androidHttpTransport.debug = true;
 			String soapAction = mNameSpace + mWebMethod;
-			HttpTransportSE androidHttpTransport = null;
+			HttpTransportSE androidHttpTransport = new HttpTransportSE(url, mTimeOut);
+			androidHttpTransport.debug = true;
 			try {
-				List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-				HeaderProperty property=new HeaderProperty("Connection", "keep-alive");
-				headerList.add(0, property);
-				androidHttpTransport = new HttpTransportSE(url, mTimeOut);
-				androidHttpTransport.call(soapAction, envelope, headerList);
-				property.setValue("close");
-				headerList.set(0, property);
+				androidHttpTransport.call(soapAction, envelope);
 				if(envelope.bodyIn instanceof SoapObject){
 					SoapObject soapResult = (SoapObject) envelope.bodyIn;
 					if(soapResult != null){
@@ -73,11 +64,11 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 					result = soapFault.getMessage();
 				}
 			} catch (IOException e) {
-				result = e.getMessage();
-				e.printStackTrace();
+				dumpRes = androidHttpTransport.responseDump;
+				result = dumpRes.equals("") ? "Cannot connect to server!" : dumpRes;
 			} catch (XmlPullParserException e) {
-				result = e.getMessage();
-				e.printStackTrace();
+				dumpRes = androidHttpTransport.responseDump;
+				result = dumpRes.equals("") ? "Cannot connect to server!" : dumpRes;
 			}
 		}else{
 			result = "Cannot connect to network!";
