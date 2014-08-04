@@ -97,6 +97,9 @@ public class Report {
 		private String productDeptName;
 		private String productCode;
 		private String productName;
+		private String productName1;
+		private String productName2;
+		private String productName3;
 		private double pricePerUnit;
 		private double qty;
 		private double qtyPercent;
@@ -249,6 +252,24 @@ public class Report {
 		}
 		public void setProductName(String productName) {
 			this.productName = productName;
+		}
+		public String getProductName1() {
+			return productName1;
+		}
+		public void setProductName1(String productName1) {
+			this.productName1 = productName1;
+		}
+		public String getProductName2() {
+			return productName2;
+		}
+		public void setProductName2(String productName2) {
+			this.productName2 = productName2;
+		}
+		public String getProductName3() {
+			return productName3;
+		}
+		public void setProductName3(String productName3) {
+			this.productName3 = productName3;
 		}
 		public double getDiscount() {
 			return discount;

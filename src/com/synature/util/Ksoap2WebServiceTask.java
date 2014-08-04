@@ -36,7 +36,6 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 	@Override
 	protected String doInBackground(String... uri) {
 		String result = "";
-		String dumpRes = "";
 		String url = uri[0];// + "?WSDL";
 		
 		System.setProperty("http.keepAlive", "false");
@@ -64,11 +63,9 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 					result = soapFault.getMessage();
 				}
 			} catch (IOException e) {
-				dumpRes = androidHttpTransport.responseDump;
-				result = dumpRes.equals("") ? "Cannot connect to server!" : dumpRes;
+				result = "Connection problems! Please try again.";
 			} catch (XmlPullParserException e) {
-				dumpRes = androidHttpTransport.responseDump;
-				result = dumpRes.equals("") ? "Cannot connect to server!" : dumpRes;
+				result = e.getMessage();
 			}
 		}else{
 			result = "Cannot connect to network!";
