@@ -1,4 +1,4 @@
-package com.synature.util;
+package com.synature.connection;
 
 import java.io.IOException;
 
@@ -36,19 +36,20 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 	@Override
 	protected String doInBackground(String... uri) {
 		String result = "";
-		String url = uri[0];// + "?WSDL";
+		String url = uri[0] + "?wsdl";
 		
-		System.setProperty("http.keepAlive", "false");
+		//System.setProperty("http.keepAlive", "false");
 		ConnectivityManager connMgr = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
 			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 			envelope.dotNet = true;
+			//envelope.encodingStyle = SoapSerializationEnvelope.ENC;
 			envelope.setOutputSoapObject(mSoapRequest);
 			String soapAction = mNameSpace + mWebMethod;
 			HttpTransportSE androidHttpTransport = new HttpTransportSE(url, mTimeOut);
-			androidHttpTransport.debug = true;
+			//androidHttpTransport.debug = true;
 			try {
 				androidHttpTransport.call(soapAction, envelope);
 				if(envelope.bodyIn instanceof SoapObject){
