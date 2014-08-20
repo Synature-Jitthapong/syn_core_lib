@@ -22,11 +22,10 @@ public class MasterData {
 	private List<ProductPrice> ProductPrice;
 	private List<ProductComponent> ProductComponent;
 	private List<PComponentGroup> PComponentGroup;
-	private List<ProductComponent> PComponentSet;
+	private List<CommentTransDept> CommentTransDept;
+	private List<CommentTransItem> COmmentTransItem;
 	private List<CommentProduct> CommentProduct;
 	private List<SaleMode> SaleMode;
-	private List<PromotionPrice> PromotionPriceGroup;
-	private List<PromotionProduct> PromotionProductDiscount;
 	private List<MenuCommentGroup> MenuCommentGroup;
 	private List<MenuComment> MenuComment;
 	private List<MenuFixComment> MenuFixComment;
@@ -84,20 +83,11 @@ public class MasterData {
 	public List<PComponentGroup> getPComponentGroup() {
 		return PComponentGroup;
 	}
-	public List<ProductComponent> getPComponentSet() {
-		return PComponentSet;
-	}
 	public List<CommentProduct> getCommentProduct() {
 		return CommentProduct;
 	}
 	public List<SaleMode> getSaleMode() {
 		return SaleMode;
-	}
-	public List<PromotionPrice> getPromotionPriceGroup() {
-		return PromotionPriceGroup;
-	}
-	public List<PromotionProduct> getPromotionProductDiscount() {
-		return PromotionProductDiscount;
 	}
 	public List<MenuCommentGroup> getMenuCommentGroup() {
 		return MenuCommentGroup;
@@ -107,5 +97,11 @@ public class MasterData {
 	}
 	public List<MenuFixComment> getMenuFixComment() {
 		return MenuFixComment;
+	}
+	public List<CommentTransDept> getCommentTransDept() {
+		return CommentTransDept;
+	}
+	public List<CommentTransItem> getCOmmentTransItem() {
+		return COmmentTransItem;
 	}
 }

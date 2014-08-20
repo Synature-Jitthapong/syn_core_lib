@@ -8,7 +8,7 @@ public class MenuComment {
 	private String MCNAM2;
 	private String MCNAM3;
 	private int MCORD;
-	private int UDATE;
+	private String UDATE;
 	public int getMCID() {
 		return MCID;
 	}
@@ -51,10 +51,10 @@ public class MenuComment {
 	public void setMCORD(int mCORD) {
 		MCORD = mCORD;
 	}
-	public int getUDATE() {
+	public String getUDATE() {
 		return UDATE;
 	}
-	public void setUDATE(int uDATE) {
+	public void setUDATE(String uDATE) {
 		UDATE = uDATE;
 	}
 }

@@ -1,6 +1,6 @@
 package com.synature.pos;
 
-public class PComponentGroup extends ProductComponent{
+public class PComponentGroup{
 	private int PGRID;
 	private int PID;
 	private int SMODE;

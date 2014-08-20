@@ -1,18 +1,18 @@
 package com.synature.pos;
 
 public class CommentProduct{
-	private int ProductID;
-	private int CommentID;
-	public int getProductID() {
-		return ProductID;
+	private int PID;
+	private int CID;
+	public int getPID() {
+		return PID;
 	}
-	public void setProductID(int productID) {
-		ProductID = productID;
+	public void setPID(int pID) {
+		PID = pID;
 	}
-	public int getCommentID() {
-		return CommentID;
+	public int getCID() {
+		return CID;
 	}
-	public void setCommentID(int commentID) {
-		CommentID = commentID;
+	public void setCID(int cID) {
+		CID = cID;
 	}
 }	
