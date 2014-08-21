@@ -29,6 +29,10 @@ public class MasterData {
 	private List<MenuCommentGroup> MenuCommentGroup;
 	private List<MenuComment> MenuComment;
 	private List<MenuFixComment> MenuFixComment;
+	
+	private List<PromotionPriceGroup> PromotionPriceGroup;
+	private List<PromotionProductDiscount> PromotionProductDiscount;
+	
 	public List<ShopProperty> getShopProperty() {
 		return ShopProperty;
 	}
@@ -103,5 +107,11 @@ public class MasterData {
 	}
 	public List<CommentTransItem> getCOmmentTransItem() {
 		return COmmentTransItem;
+	}
+	public List<PromotionPriceGroup> getPromotionPriceGroup() {
+		return PromotionPriceGroup;
+	}
+	public List<PromotionProductDiscount> getPromotionProductDiscount() {
+		return PromotionProductDiscount;
 	}
 }

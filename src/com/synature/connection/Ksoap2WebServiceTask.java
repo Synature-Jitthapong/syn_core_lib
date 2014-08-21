@@ -37,8 +37,8 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 	protected String doInBackground(String... uri) {
 		String result = "";
 		String url = uri[0];
-		
-		//System.setProperty("http.keepAlive", "false");
+
+		System.setProperty("http.keepAlive", "false");
 		ConnectivityManager connMgr = (ConnectivityManager) mContext
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();

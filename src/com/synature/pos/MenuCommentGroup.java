@@ -2,7 +2,7 @@ package com.synature.pos;
 
 public class MenuCommentGroup {
 	private int MCGRID;
-	private String MCGRNAM;
+	private String MCGRNAM0;
 	private String MCGRNAM1;
 	private String UDATE;
 	public int getMCGRID() {
@@ -11,11 +11,11 @@ public class MenuCommentGroup {
 	public void setMCGRID(int mCGRID) {
 		MCGRID = mCGRID;
 	}
-	public String getMCGRNAM() {
-		return MCGRNAM;
+	public String getMCGRNAM0() {
+		return MCGRNAM0;
 	}
-	public void setMCGRNAM(String mCGRNAM) {
-		MCGRNAM = mCGRNAM;
+	public void setMCGRNAM0(String mCGRNAM0) {
+		MCGRNAM0 = mCGRNAM0;
 	}
 	public String getMCGRNAM1() {
 		return MCGRNAM1;

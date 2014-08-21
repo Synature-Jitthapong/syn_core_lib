@@ -1,6 +1,6 @@
 package com.synature.pos;
 
-public class PromotionProduct{
+public class PromotionProductDiscount{
 	private int PriceGroupID;
 	private int ProductID;
 	private int SaleMode;
