@@ -9,6 +9,7 @@ public class ComputerProperty{
 	private int IsQueueOrder;
 	private String DocumentTypeHeader;
 	private int PrintReceiptHasCopy;
+	private int PrintVatInReceipt;
 	
 	public int getPrintReceiptHasCopy() {
 		return PrintReceiptHasCopy;
@@ -57,5 +58,11 @@ public class ComputerProperty{
 	}
 	public void setIsQueueOrder(int isQueueOrder) {
 		IsQueueOrder = isQueueOrder;
+	}
+	public int getPrintVatInReceipt() {
+		return PrintVatInReceipt;
+	}
+	public void setPrintVatInReceipt(int printVatInReceipt) {
+		PrintVatInReceipt = printVatInReceipt;
 	}
 }
