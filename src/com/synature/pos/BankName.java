@@ -15,4 +15,8 @@ public class BankName {
 	public void setBankName(String bankName) {
 		this.BankName = bankName;
 	}
+	@Override
+	public String toString() {
+		return BankName;
+	}
 }

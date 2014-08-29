@@ -15,4 +15,8 @@ public class CreditCardType {
 	public void setCreditCardTypeName(String creditCardTypeName) {
 		this.CreditCardTypeName = creditCardTypeName;
 	}
+	@Override
+	public String toString() {
+		return CreditCardTypeName;
+	}
 }
