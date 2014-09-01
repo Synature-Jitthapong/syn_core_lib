@@ -63,7 +63,7 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 					result = soapFault.getMessage();
 				}
 			} catch (IOException e) {
-				result = "Connection problems! Please try again.";
+				result = e.getMessage();
 			} catch (XmlPullParserException e) {
 				result = e.getMessage();
 			}
