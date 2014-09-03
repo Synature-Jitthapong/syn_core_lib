@@ -2,6 +2,7 @@ package com.synature.pos;
 
 public class Staff {	
 	private int StaffID;
+	private int StaffRoleID;
 	private String StaffCode;
 	private String StaffName;
 	private String StaffPassword;
@@ -36,5 +37,13 @@ public class Staff {
 
 	public void setStaffPassword(String staffPassword) {
 		StaffPassword = staffPassword;
+	}
+
+	public int getStaffRoleID() {
+		return StaffRoleID;
+	}
+
+	public void setStaffRoleID(int staffRoleID) {
+		StaffRoleID = staffRoleID;
 	}	
 }
