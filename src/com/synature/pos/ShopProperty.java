@@ -26,6 +26,7 @@ public class ShopProperty {
 		private double CompanyVat;
 		private int FeatureQueue;
 		private int CommentType;
+		private int PrintVatInReceipt;
 
 		public int getFeatureQueue() {
 			return FeatureQueue;
@@ -226,5 +227,13 @@ public class ShopProperty {
 
 		public void setCompanyVat(double companyVat) {
 			CompanyVat = companyVat;
+		}
+
+		public int getPrintVatInReceipt() {
+			return PrintVatInReceipt;
+		}
+
+		public void setPrintVatInReceipt(int printVatInReceipt) {
+			PrintVatInReceipt = printVatInReceipt;
 		}
 	}
