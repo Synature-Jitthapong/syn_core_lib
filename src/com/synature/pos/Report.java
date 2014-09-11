@@ -120,6 +120,8 @@ public class Report {
 		private double diff;
 		private double vatExclude;
 		private int sendStatus;
+		private double latitude;
+		private double longitude;
 
 		public int getSendStatus() {
 			return sendStatus;
@@ -318,6 +320,18 @@ public class Report {
 		}
 		public void setDiff(double diff) {
 			this.diff = diff;
+		}
+		public double getLatitude() {
+			return latitude;
+		}
+		public void setLatitude(double latitude) {
+			this.latitude = latitude;
+		}
+		public double getLongitude() {
+			return longitude;
+		}
+		public void setLongitude(double longitude) {
+			this.longitude = longitude;
 		}
 	}
 	

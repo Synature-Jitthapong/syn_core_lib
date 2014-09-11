@@ -2,6 +2,11 @@ package com.synature.connection;
 
 import java.io.IOException;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.PropertyInfo;
@@ -43,29 +48,43 @@ public abstract class Ksoap2WebServiceTask extends AsyncTask<String, String, Str
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 		if (networkInfo != null && networkInfo.isConnected()) {
-			SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-			envelope.dotNet = true;
-			envelope.setOutputSoapObject(mSoapRequest);
-			String soapAction = mNameSpace + mWebMethod;
-			HttpTransportSE androidHttpTransport = new HttpTransportSE(url, mTimeOut);
-			androidHttpTransport.debug = true;
+			// check server status
+			HttpClient httpClient = new DefaultHttpClient();
 			try {
-				androidHttpTransport.call(soapAction, envelope);
-				if(envelope.bodyIn instanceof SoapObject){
-					SoapObject soapResult = (SoapObject) envelope.bodyIn;
-					if(soapResult != null){
-						result = soapResult.getProperty(0).toString();
-					}else{
-						result = "No result!";
+				HttpResponse res = httpClient.execute(new HttpGet(url));
+				int resCode = res.getStatusLine().getStatusCode();
+				if(resCode == 200){
+					SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+					envelope.dotNet = true;
+					envelope.setOutputSoapObject(mSoapRequest);
+					String soapAction = mNameSpace + mWebMethod;
+					HttpTransportSE androidHttpTransport = new HttpTransportSE(url, mTimeOut);
+					androidHttpTransport.debug = true;
+					try {
+						androidHttpTransport.call(soapAction, envelope);
+						if(envelope.bodyIn instanceof SoapObject){
+							SoapObject soapResult = (SoapObject) envelope.bodyIn;
+							if(soapResult != null){
+								result = soapResult.getProperty(0).toString();
+							}else{
+								result = "No result!";
+							}
+						}else if(envelope.bodyIn instanceof SoapFault){
+							SoapFault soapFault = (SoapFault) envelope.bodyIn;
+							result = soapFault.getMessage();
+						}
+					} catch (IOException e) {
+						result = e.getMessage();
+					} catch (XmlPullParserException e) {
+						result = e.getMessage();
 					}
-				}else if(envelope.bodyIn instanceof SoapFault){
-					SoapFault soapFault = (SoapFault) envelope.bodyIn;
-					result = soapFault.getMessage();
+				}else{
+					result = "Status: " + resCode + " " + res.getStatusLine().getReasonPhrase();
 				}
-			} catch (IOException e) {
-				result = e.getMessage();
-			} catch (XmlPullParserException e) {
-				result = e.getMessage();
+			} catch (ClientProtocolException e1) {
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 		}else{
 			result = "Cannot connect to network!";
